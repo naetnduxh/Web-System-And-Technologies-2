@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kshs to USSD Converter</title>
+</head>
+<body onload="convertKshsToUssd()">
+
+    <script>
+        function convertKshsToUssd() {
+            // 1. Prompt for input in Kshs
+            let kshsAmount = prompt("Enter the amount of money in Kshs:");
+
+            if (kshsAmount === null || kshsAmount.trim() === "") {
+                alert("Operation canceled.");
+                return;
+            }
+
+            kshsAmount = kshsAmount.trim();
+
+            if (isNaN(kshsAmount) || Number(kshsAmount) <= 0) {
+                alert("Please enter a valid numeric amount.");
+                return;
+            }
+
+            let ussdValue = (Number(kshsAmount) / 130).toFixed(2);
+
+            let serviceCode = "*334";
+            let finalUssdCode = serviceCode + "*" + ussdValue + "#";
+
+            alert("Kshs Amount: " + kshsAmount + " Kshs\n" +
+                  "Converted Value: " + ussdValue + " USSD");
+        }
+    </script>
+
+</body>
+</html>

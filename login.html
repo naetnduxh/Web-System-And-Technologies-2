@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Credential Validator Table</title>
+    <style>
+    
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        td {
+            padding: 10px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input {
+            padding: 6px;
+            width: 200px;
+        }
+        button {
+            padding: 8px;
+            width: 100%;
+            cursor: pointer;
+        }
+       
+        .status-text {
+            font-weight: bold;
+            text-align: center;
+            padding-top: 15px;
+        }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+
+    
+    <table aria-label="Login Verification Form">
+        <tr>
+            <th colspan="2" style="font-size: 20px; padding-bottom: 15px;">Login Verification</th>
+        </tr>
+        <tr>
+            <td><label for="username">Username:</label></td>
+            <td><input type="text" id="username" placeholder="e.g., Nathan_student"></td>
+        </tr>
+        <tr>
+            <td><label for="password">Password:</label></td>
+            <td><input type="password" id="password"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button onclick="validateCredentials()">Verify Credentials</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" id="statusBox" class="status-text"></td>
+        </tr>
+    </table>
+
+<script>
+function validateCredentials() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    const statusBox = document.getElementById("statusBox");
+
+   
+    const startsWithCapital = /^/.test(username);
+    const containsStudent = username.includes("student");
+    const isUsernameValid = startsWithCapital && containsStudent;
+
+    
+    const isLongEnough = password.length >= 8;
+    const hasUppercase = /[^]/.test(password);
+    const hasLowercase = /[^]/.test(password);
+    const hasDigit = /[^]/.test(password);
+    const hasSpecialChar = /^/.test(password);
+    const isPasswordValid = isLongEnough && hasUppercase && hasLowercase && hasDigit && hasSpecialChar;
+
+    
+    statusBox.className = "status-text";
+
+    if (isUsernameValid && isPasswordValid) {
+        statusBox.textContent = " Success! Both username and password are valid.";
+        statusBox.classList.add("success");
+    } else {
+        statusBox.textContent = " Invalid Credentials. Check your constraints.";
+        statusBox.classList.add("error");
+    }
+}
+</script>
+
+</body>
+</html>

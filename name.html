@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Name Combiner</title>
+</head>
+<body onload="combineNames()">
+
+    <script>
+        function combineNames() {
+            let firstName = prompt("Enter your first name:");
+            if (firstName === null) return; 
+
+            let secondName = prompt("Enter your second name:");
+            if (secondName === null) return; 
+
+            let fullName = firstName.trim() + " " + secondName.trim();
+
+            alert("Your full name is:\n" + fullName);
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Marks Program</title>
+</head>
+<body>
+
+    <div id="resultsTable"></div>
+
+    <script>
+        // Student marks program (Browser Interactive Version)
+        const studentName = prompt("Enter student name:") || "Student";
+        const numberOfUnits = Number(prompt("Enter number of units:")) || 0;
+        const results = [];
+
+        function getGrade(total) {
+            if (total >= 70) return "A";
+            if (total >= 60) return "B";
+            if (total >= 50) return "C";
+            if (total >= 40) return "D";
+            return "E";
+        }
+
+        for (let i = 0; i < numberOfUnits; i++) {
+            const unitCode = prompt(`Enter Unit Code for unit ${i + 1}:`) || "";
+            const unitName = prompt(`Enter Unit Name for unit ${i + 1}:`) || "";
+            const cat = Number(prompt(`Enter CAT mark for ${unitCode}:`)) || 0;
+            const exam = Number(prompt(`Enter Exam mark for ${unitCode}:`)) || 0;
+            const total = cat + exam;
+
+            results.push({
+                unitCode: unitCode,
+                unitName: unitName,
+                cat: cat,
+                exam: exam,
+                total: total,
+                grade: getGrade(total)
+            });
+        }
+
+        let table = `
+            <h2>Student Results</h2>
+            <p>Student Name: ${studentName}</p>
+            <table border="1" cellpadding="8">
+                <tr>
+                    <th>Unit Code</th>
+                    <th>Unit Name</th>
+                    <th>CAT</th>
+                    <th>Exam</th>
+                    <th>Total</th>
+                    <th>Grade</th>
+                </tr>
+        `;
+
+        results.forEach(result => {
+            table += `
+                <tr>
+                    <td>${result.unitCode}</td>
+                    <td>${result.unitName}</td>
+                    <td>${result.cat}</td>
+                    <td>${result.exam}</td>
+                    <td>${result.total}</td>
+                    <td>${result.grade}</td>
+                </tr>
+            `;
+        });
+
+        table += `</table>`;
+
+        // Inject the generated table into the page
+        document.getElementById("resultsTable").innerHTML = table;
+    </script>
+
+</body>
+</html>
